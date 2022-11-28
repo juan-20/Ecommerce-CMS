@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import { client } from '../../lib/client';
+import FooterBanner from '../components/FooterBanner';
 import HeroBanner from '../components/HeroBanner'
+import Product from '../components/Product';
 
 export default function Home({products, banner}) {
+  console.log(products)
   return (
     <>
       <Head>
@@ -15,12 +18,16 @@ export default function Home({products, banner}) {
 
       <div className='products-heading'>
         <h2>Loja do juan</h2>
-        <p>Muita comida boa</p>
+        <p>Produtos:</p>
       </div>
 
       <div className='products-container'>
-        {products?.map((p) => p.name)}
+        {products?.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
       </div>
+
+      <FooterBanner footerBanner={banner && banner[0]} />
     
     </>
   )
