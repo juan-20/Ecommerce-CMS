@@ -12,7 +12,8 @@ export default function ProductPage({product, products}) {
     const {     
         qty,
         increaseQuantity,
-        decreaseQuantity 
+        decreaseQuantity,
+        onAdd
     } = useStateContext()
 
   return (
@@ -77,7 +78,8 @@ export default function ProductPage({product, products}) {
                </div>
                <div className="buttons">
                 <button type='button'
-                className='add-to-cart'>
+                className='add-to-cart'
+                onClick={() => onAdd(product, qty)}>
                     Add to cart
                 </button>
                 <button type='button'

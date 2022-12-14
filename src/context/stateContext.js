@@ -1,16 +1,38 @@
+import { toast } from "react-hot-toast";
+
 const { createContext, useState, useContext } = require("react");
 
 const Context =  createContext();
 
 export const StateContext = ({children}) => {
     const [showCart, setShowCart] = useState(false)
-    const [cartItems, setCartItems] = useState()
+    const [cartItems, setCartItems] = useState([])
     const [totalPrice, setTotalPrice] = useState()
     const [totalQuantities, setTotalQuantities] = useState()
     const [qty, setQty] = useState(1)
 
     function onAdd(product, quantity){
-        
+        const checkProductInCart = cartItems.find((item) => item._Id == product._Id);
+
+        setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
+        setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
+
+        if(checkProductInCart) {
+
+            const updatedCartItems = cartItems.map((cartProduct) => {
+                if(cartProduct._Id === product._Id)return{
+                    ...cartProduct, 
+                    quantity: cartProduct.quantity + quantity
+                }
+            })
+
+            setCartItems(updatedCartItems)
+        } else{
+            product.quantity = quantity
+            
+            setCartItems([...cartItems, { ...product }])
+        }
+        toast.success(`${qty} ${product.name} added to cart`)
     }
 
     function increaseQuantity(){
@@ -34,7 +56,8 @@ export const StateContext = ({children}) => {
             totalQuantities,
             qty,
             increaseQuantity,
-            decreaseQuantity
+            decreaseQuantity,
+            onAdd
         }}
         >
             {children}
