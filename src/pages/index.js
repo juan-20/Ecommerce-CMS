@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { client } from '../../lib/client';
+import {client} from '../../sanity/lib/client'
 import FooterBanner from '../components/FooterBanner';
 import HeroBanner from '../components/HeroBanner'
 import Product from '../components/Product';
