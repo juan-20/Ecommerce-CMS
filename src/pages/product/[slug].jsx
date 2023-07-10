@@ -3,6 +3,7 @@ import { client, urlFor } from '../../../lib/client';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from  'react-icons/ai'
 import Product from '../../components/Product';
 import { useStateContext } from '../../context/stateContext';
+import Image from 'next/image';
 
 export default function ProductPage({product, products}) {
     const {image, name, details, price} = product
@@ -27,7 +28,9 @@ export default function ProductPage({product, products}) {
                 </div>
                 <div className="small-images-conatiner">
                     {image?.map((item, i) => (
-                        <img
+                        <Image
+                        key={i}
+                        alt='teste'
                         src={urlFor(item)}
                         className={i === index ? 'small-image selected-image' : 'small-image'}
                         onMouseEnter={() => setIndex(i)}
