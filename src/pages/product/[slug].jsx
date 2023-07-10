@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import { client, urlFor } from '../../../lib/client';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from  'react-icons/ai'
@@ -28,6 +30,7 @@ export default function ProductPage({product, products}) {
                 <div className="small-images-conatiner">
                     {image?.map((item, i) => (
                         <img
+                        key={i}
                         src={urlFor(item)}
                         className={i === index ? 'small-image selected-image' : 'small-image'}
                         onMouseEnter={() => setIndex(i)}
